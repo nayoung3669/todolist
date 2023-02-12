@@ -6,8 +6,6 @@ import { VStack, Box } from "@chakra-ui/react";
 
 function TodoList() {
     const [todos, setTodos] = useState([
-        { id: "", task: "ex1", completed: false },
-        { id: "", task: "ex2", completed: false }
     ]);
 
     const createTodos = (data) =>{

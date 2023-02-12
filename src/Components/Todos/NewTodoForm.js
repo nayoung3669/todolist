@@ -1,4 +1,5 @@
-import { Box, Button, FormLabel, Input, HStack, Checkbox, CheckboxGroup } from "@chakra-ui/react";
+import { Button, Input, HStack } from "@chakra-ui/react";
+
 import { useState } from "react";
 import uuid from "react-uuid";
 
@@ -19,16 +20,14 @@ function NewTodoForm({updateTodos}) {
         setFormData({task: ""})
     }
 
-    
 
     return (
         <form onSubmit={handleSubmit}>
-            <HStack maxW="lg" spacing={40} bgColor="beige">
-                {/* <FormLabel htmlFor="task">Task</FormLabel> */}
+            <HStack maxW="lg" spacing={40} bgColor="#fafafa">
                 <Input id="task" name="task" size="lg" type="text" variant="outline"
                     value={formData.task} onChange={handleChange} placeholder="New Task"
                 />
-                <Button type="submit" colorScheme="blue" size="lg" >ADD</Button>
+                <Button type="submit" bg="#c5cae9" size="lg" >ADD</Button>
             </HStack>
         </form>
     )

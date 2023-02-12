@@ -23,11 +23,11 @@ function NewTodoForm({updateTodos}) {
 
     return (
         <form onSubmit={handleSubmit}>
-            <HStack maxW="lg" spacing={40} bgColor="#fafafa">
-                <Input id="task" name="task" size="lg" type="text" variant="outline"
-                    value={formData.task} onChange={handleChange} placeholder="New Task"
+            <HStack  spacing={40} bgColor="#d8c8b8">
+                <Input id="task" name="task" size="lg" type="text" maxLength={50} variant="outline"
+                    value={formData.task} onChange={handleChange} placeholder="New Task" border="none"
                 />
-                <Button type="submit" bg="#c5cae9" size="lg" >ADD</Button>
+                <Button type="submit" bg="#a8a39d" size="lg" >ADD</Button>
             </HStack>
         </form>
     )

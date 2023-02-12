@@ -1,11 +1,10 @@
 import React, { useState } from 'react'
-import { Checkbox, Text, Box, Input, Stack } from '@chakra-ui/react'
+import { Checkbox, Text, Box, Input, Stack, HStack } from '@chakra-ui/react'
 import { DeleteIcon, EditIcon, CheckIcon } from '@chakra-ui/icons'
 
 
 const Todo = ({updateTodo, deleteTodo, todo}) => {
     const [isEditing, setIsEditing] = useState(false)
-    console.log(todo)
 
     const toggleEditing = () => {
         if (isEditing) {
@@ -25,13 +24,13 @@ const Todo = ({updateTodo, deleteTodo, todo}) => {
                     <Text height="40px">{todo.task}</Text> 
                 </>
             }
-            <Stack display="flex" flexDirection="row" width="70px" >
+            <Stack display="flex" flexDirection="row" width="62px" >
                 {isEditing? 
                     <CheckIcon onClick={toggleEditing}/>: 
-                    <Stack alignItems="flex-start">
-                        <EditIcon onClick={toggleEditing} boxSize={5} color="#26418f"/> 
-                        <DeleteIcon alignSelf="flex-end" onClick={() => deleteTodo(todo.id)}  boxSize={5} color="#26418f"/>
-                    </Stack>
+                    <HStack spacing={5}>
+                        <EditIcon onClick={toggleEditing} boxSize={5} color="#8d7966"/> 
+                        <DeleteIcon alignSelf="flex-end" onClick={() => deleteTodo(todo.id)}  boxSize={5} color="#8d7966"/>
+                    </HStack>
                 }
             </Stack>
             

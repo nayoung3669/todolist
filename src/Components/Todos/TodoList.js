@@ -1,12 +1,12 @@
 import React, { useState } from "react";
+import './TodoList.css'
 import NewTodoForm from "./NewTodoForm";
 import Todo from "./Todo";
 import { VStack, Box } from "@chakra-ui/react";
 
 
 function TodoList() {
-    const [todos, setTodos] = useState([
-    ]);
+    const [todos, setTodos] = useState([]);
 
     const createTodos = (data) =>{
         console.log(data);
@@ -26,15 +26,14 @@ function TodoList() {
     }
 
     const deleteTodos = (id) => {
-        console.log("cl")
         const deletedList = todos.filter(todo => id !== todo.id);
         setTodos(deletedList);
     } 
 
     return (
-        <Box width="100%">
+        <Box className="todoList" width="100%">
             <NewTodoForm updateTodos={createTodos} />
-            <VStack display="flex" flexDirection="column" alignItems="flex-start" bg="#eeeeee" width="510px" minW="400px">
+            <VStack display="flex" flexDirection="column" alignItems="flex-start" bg="#f8f1e9">
                 <ul>
                     {todos.map ((todo) => {
                         return (

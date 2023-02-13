@@ -20,7 +20,7 @@ function TodoList() {
                 //change it to name !!!!
                 
             } else {
-                return {...todo}
+                return todo;
             }
         })
         setTodos(updatedTodos);
@@ -30,6 +30,18 @@ function TodoList() {
         const deletedList = todos.filter(todo => id !== todo.id);
         setTodos(deletedList);
     } 
+
+    const toggleProgress = (id) => {
+        const updatedTodos = todos.map((todo) => {
+            if(id === todo.id) {
+                return {...todo, inProgress: !todo.inProgress};
+            } else {
+                return todo;
+            }
+        })
+        setTodos(updatedTodos);
+        console.log(todos);
+    }
 
     return (
             <Stack className="cards" width="100%" bg="#E9EAEC" padding="15px">
@@ -42,6 +54,7 @@ function TodoList() {
                                 <Todo 
                                     updateTodo={updateTodos}
                                     deleteTodo={deleteTodos}
+                                    toggleProgress={toggleProgress}
                                     todo={todo}
                                 />
                             </li>)

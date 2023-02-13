@@ -3,9 +3,8 @@ import { Card, Text, Heading, Box, Input, Stack, HStack, CardHeader, CardBody, C
 import { MinusIcon, EditIcon, CheckIcon, TimeIcon } from '@chakra-ui/icons'
 
 
-const Todo = ({updateTodo, deleteTodo, todo}) => {
+const Todo = ({updateTodo, deleteTodo, toggleProgress, todo}) => {
     const [isEditing, setIsEditing] = useState(false)
-    const [isInProgress, setIsDone] = useState(false);
 
     const toggleEditing = () => {
         if (isEditing) {
@@ -14,11 +13,6 @@ const Todo = ({updateTodo, deleteTodo, todo}) => {
             setIsEditing(true);
         }
     }
-
-    const toggleprogress = () => {
-        
-    }
-    console.log(todo);
 
     return (
         <Card display="flex" margin="30px" borderRadius={15} minW="250px" minH="230px" boxShadow='lg' rounded='md'>
@@ -45,7 +39,7 @@ const Todo = ({updateTodo, deleteTodo, todo}) => {
                     {isEditing? 
                         <CheckIcon onClick={toggleEditing}/>: 
                         <HStack spacing={7} marginBottom="20px" >
-                            <Checkbox colorScheme="gray"/>
+                            <Checkbox colorScheme="gray" onChange={toggleProgress(todo.id)}/>
                             <EditIcon onClick={toggleEditing} boxSize={5} color="#333652"/> 
                             <MinusIcon alignSelf="flex-end" onClick={() => deleteTodo(todo.id)}  boxSize={5} color="#333652"/>
                         </HStack>

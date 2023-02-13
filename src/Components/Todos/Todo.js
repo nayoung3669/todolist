@@ -1,10 +1,11 @@
 import React, { useState } from 'react'
-import { Checkbox, Text, Box, Input, Stack, HStack } from '@chakra-ui/react'
-import { DeleteIcon, EditIcon, CheckIcon } from '@chakra-ui/icons'
+import { Card, Text, Heading, Box, Input, Stack, HStack, CardHeader, CardBody, Checkbox, EditableTextarea, Editable, EditablePreview  } from '@chakra-ui/react'
+import { MinusIcon, EditIcon, CheckIcon, TimeIcon } from '@chakra-ui/icons'
 
 
 const Todo = ({updateTodo, deleteTodo, todo}) => {
     const [isEditing, setIsEditing] = useState(false)
+    const [isInProgress, setIsDone] = useState(false);
 
     const toggleEditing = () => {
         if (isEditing) {
@@ -14,27 +15,44 @@ const Todo = ({updateTodo, deleteTodo, todo}) => {
         }
     }
 
+    const toggleprogress = () => {
+        
+    }
+    console.log(todo);
+
     return (
-        <Box display="flex" flexDirection="row" justifyContent="space-between" alignItems="center" width="450px" minW="50px" margin="20px" borderBottom="1px solid grey">
-            
-            {isEditing? 
-                <Input name="editedText" id="editedText" onChange={e => updateTodo(todo.id, e.target.value)}/> : 
-                <>
-                    <Checkbox colorScheme="gray" border="1px solid grey"></Checkbox>
-                    <Text height="40px">{todo.task}</Text> 
-                </>
-            }
-            <Stack display="flex" flexDirection="row" width="62px" >
+        <Card display="flex" margin="30px" borderRadius={15} minW="250px" minH="230px" boxShadow='lg' rounded='md'>
+            <Box display="flex" flexDirection="column" justifyContent="space-between" alignItems="center"  margin="20px" borderBottom="1px solid grey" >
                 {isEditing? 
-                    <CheckIcon onClick={toggleEditing}/>: 
-                    <HStack spacing={5}>
-                        <EditIcon onClick={toggleEditing} boxSize={5} color="#8d7966"/> 
-                        <DeleteIcon alignSelf="flex-end" onClick={() => deleteTodo(todo.id)}  boxSize={5} color="#8d7966"/>
-                    </HStack>
+                    <Input name="editedText" id="editedText" onChange={e => updateTodo(todo.id, "task", e.target.value)}/> : 
+                    <>
+                        <CardHeader><Heading size="md" height="40px">{todo.task} </Heading></CardHeader>
+                        <CardBody>
+                                <Editable defaultValue='Description' color="gray">
+                                    <EditablePreview />
+                                    <EditableTextarea />
+                                </Editable>
+                                <HStack>
+                                    {todo.due && !todo.category ? <Text fontSize="sm" ><TimeIcon />{todo.due} </Text>: null }
+                                    {todo.category && !todo.due ? <Text fontSize="sm">{todo.category}</Text>: null }
+                                    {todo.due && todo.category ? <Text fontSize="sm"><TimeIcon /> {todo.due} / {todo.category}</Text>: null}
+                                </HStack>
+                        </CardBody>
+                        
+                    </>
                 }
-            </Stack>
-            
-        </Box>
+                <Stack display="flex" flexDirection="row" width="62px" justifyContent="center" >
+                    {isEditing? 
+                        <CheckIcon onClick={toggleEditing}/>: 
+                        <HStack spacing={7} marginBottom="20px" >
+                            <Checkbox colorScheme="gray"/>
+                            <EditIcon onClick={toggleEditing} boxSize={5} color="#333652"/> 
+                            <MinusIcon alignSelf="flex-end" onClick={() => deleteTodo(todo.id)}  boxSize={5} color="#333652"/>
+                        </HStack>
+                    }
+                </Stack>
+            </Box>
+        </Card>
     )
 }
 

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import './TodoList.css'
 import NewTodoForm from "./NewTodoForm";
 import Todo from "./Todo";
-import { VStack, Box } from "@chakra-ui/react";
+import { Stack, Box } from "@chakra-ui/react";
 
 
 function TodoList() {
@@ -13,10 +13,11 @@ function TodoList() {
         setTodos([...todos, data]);
     }
 
-    const updateTodos = (id, editedText) => {
+    const updateTodos = (id, name, editedText) => {
         const updatedTodos = todos.map((todo) => {
             if (id === todo.id) {
-                return {...todo, task: editedText}
+                return {...todo, task: editedText} 
+                //change it to name !!!!
                 
             } else {
                 return {...todo}
@@ -31,23 +32,23 @@ function TodoList() {
     } 
 
     return (
-        <Box className="todoList" width="100%">
-            <NewTodoForm updateTodos={createTodos} />
-            <VStack display="flex" flexDirection="column" alignItems="flex-start" bg="#f8f1e9">
-                <ul>
-                    {todos.map ((todo) => {
-                        return (
-                        <li>
-                            <Todo 
-                                updateTodo={updateTodos}
-                                deleteTodo={deleteTodos}
-                                todo={todo}
-                            />
-                        </li>)
-                    })}
-                </ul>
-            </VStack>
-        </Box>
+            <Stack className="cards" width="100%" bg="#E9EAEC" padding="15px">
+                <NewTodoForm updateTodos={createTodos} />
+                <Box className="todoList" >
+                    <ul>
+                        {todos.map ((todo) => {
+                            return (
+                            <li>
+                                <Todo 
+                                    updateTodo={updateTodos}
+                                    deleteTodo={deleteTodos}
+                                    todo={todo}
+                                />
+                            </li>)
+                        })}
+                    </ul>
+                </Box>
+            </Stack>
     )
 
             }

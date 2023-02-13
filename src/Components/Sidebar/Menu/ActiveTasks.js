@@ -1,6 +1,8 @@
 import React from 'react'
 
-const ActiveTasks = () => {
+const ActiveTasks = ({updatedList}) => {
+  console.log("active")
+  console.log(updatedList)
   return (
     <div>ActiveTasks</div>
   )

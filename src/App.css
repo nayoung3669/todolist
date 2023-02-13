@@ -4,10 +4,9 @@
 
 .App {
   display: grid;
-  grid-template-columns: 1fr 4fr;
   grid-template-areas:
     "header  header"
-    "sidebar main"
+    "main main"
     "footer  footer";
 }
 

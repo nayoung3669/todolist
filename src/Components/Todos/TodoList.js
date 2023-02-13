@@ -31,10 +31,10 @@ function TodoList() {
         setTodos(deletedList);
     } 
 
-    const toggleProgress = (id) => {
+    const toggleProgress = (id, state) => {
         const updatedTodos = todos.map((todo) => {
             if(id === todo.id) {
-                return {...todo, inProgress: !todo.inProgress};
+                return {...todo, inProgress: !state};
             } else {
                 return todo;
             }

@@ -39,6 +39,7 @@ function NewTodoForm({updateTodos}) {
                     <Input id="due" type="date" name="due" size="sm" variant="flushed" width="120px" value={formik.values.due} onChange={formik.handleChange} {...getFieldProps("due")}/>
                 </FormControl>
                 <FormControl >
+                    
                     <Select id="" variant="flushed" name="due" maxW="100px" placeholder="Category" value={formik.values.category} onChange={formik.handleChange} {...getFieldProps("category")}>
                         <option value="School" color="red">School 📖</option>
                         <option value="Work">Work 📂</option>

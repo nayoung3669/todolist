@@ -5,7 +5,7 @@ import './Header.css'
 const Header = () => {
   return (
     <div className='header'>
-        <Text fontSize="2em"> Todo List</Text>
+        <Text fontSize="2em" ml="40px" > Todo List</Text>
     </div>
   )
 }

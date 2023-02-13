@@ -12,11 +12,11 @@ function NewTodoForm({updateTodos}) {
             task: "",
             due: "",
             description: "",
-            inProgress: false,
+            inProgress: true,
             category:"",
         },
         onSubmit:(values, actions) => {
-            updateTodos({id: uuid(), task: values.task, due: values.due, description:"", inProgress: false, category: values.category});
+            updateTodos({id: uuid(), task: values.task, due: values.due, description:"", inProgress: true, category: values.category});
             actions.resetForm();
         },
         validationSchema: yup.object({

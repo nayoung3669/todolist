@@ -5,8 +5,7 @@ import Todo from "./Todo";
 import { Stack, Box } from "@chakra-ui/react";
 
 
-function TodoList() {
-    const [todos, setTodos] = useState([]);
+function TodoList({todos, setTodos}) {
 
     const createTodos = (data) =>{
         console.log(data);

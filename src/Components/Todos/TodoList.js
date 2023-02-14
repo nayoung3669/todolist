@@ -9,11 +9,6 @@ function TodoList() {
     const [todos, setTodos] = useContext(DataContext);
     console.log(todos);
 
-    // const createTodos = (data) =>{
-    //     console.log(data);
-    //     setTodos([...todos, data]);
-    // }
-
     // const updateTodos = (id, editedText) => {
     //     const updatedTodos = todos.map((todo) => {
     //         if (id === todo.id) {
@@ -30,16 +25,15 @@ function TodoList() {
     //     setTodos(deletedList);
     // } 
 
-    // const toggleProgress = (id, checked ) => {
-    //     const updatedTodos = todos.map((todo) => {
-    //         if(id === todo.id) {
-    //             return {...todo, inProgress: checked};
-    //         } else {
-    //             return todo;
-    //         }
-    //     })
-    //     setTodos(updatedTodos);
-    // }
+    const switchComplete = (id) => {
+        const updatedTodos = [...todos];
+        updatedTodos.forEach((todo, index) => {
+            if(index === id) {
+                todo.complete = !todo.complete
+            }
+        })
+        setTodos(updatedTodos);
+    }
 
     return (
             <Stack className="cards" width="100%" bg="#E9EAEC" padding="15px">
@@ -52,7 +46,7 @@ function TodoList() {
                                 <Todo
                                     // updateTodo={updateTodos}
                                     // deleteTodo={deleteTodos}
-                                    // toggleProgress={toggleProgress}
+                                    checkComplete={switchComplete}
                                     todo={todo}
                                     key={index}
                                     id={index}

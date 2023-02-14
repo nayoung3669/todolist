@@ -1,61 +1,49 @@
 import React, { useState } from 'react'
-import { Card, Text, Heading, Box, Input, Stack, Button, HStack, CardHeader, CardBody, Checkbox, EditableTextarea, Editable, EditablePreview  } from '@chakra-ui/react'
-import { MinusIcon, EditIcon, CheckIcon, TimeIcon } from '@chakra-ui/icons'
+import { Card, Text, Box, Input, Stack, Button, HStack, CardHeader, CardBody } from '@chakra-ui/react'
+import { MinusIcon, EditIcon, TimeIcon } from '@chakra-ui/icons'
+import './Todo.css'
 
 
-const Todo = ({updateTodo, deleteTodo, toggleProgress, todo, id}) => {
+const Todo = ({updateTodo, deleteTodo, checkComplete, todo, id}) => {
 
     const [isEditing, setIsEditing] = useState(false)
-    const [checked, setChecked] = useState(todo.complete);
-
+    const [updatedTask, setUpdatedTask] = useState("");
 
     const toggleEditing = () => {
-        if (isEditing) {
-            setIsEditing(false);
-        } else {
-            setIsEditing(true);
-        }
+        setIsEditing(true);
     }
 
-    const checkHandler = () => {
-        setChecked(!checked);
-        // toggleProgress(todo.id, !checked);
+    const handleEditing = () => {
+        setIsEditing(false);
+        todo.task = updatedTask;
+        setUpdatedTask('');
     }
-
 
     return (
-        <Card display="flex" margin="30px" borderRadius={15} minW="250px" minH="230px" boxShadow='lg' rounded='md'>
+        <Card display="flex" margin="25px" borderRadius={15} minW="220px" minH="180px" boxShadow='lg' rounded='md'>
             <Box display="flex" flexDirection="column" justifyContent="space-between" alignItems="center"  margin="20px" borderBottom="1px solid grey" >
-                {isEditing? 
-                    <Input name="editedText" id="editedText" onChange={e => updateTodo(todo.id, "task", e.target.value)} autoFocus={true} minH="150px" marginBottom="30px"/> : 
-                    <>
+                {isEditing
+                    ? <CardBody><Input type="text" id="updatedTask" name="updatedTask" value={updatedTask} onChange={(e) => setUpdatedTask(e.target.value)} /><Button size="sm" onClick={() => handleEditing(id)}>Save</Button></CardBody>
+                    : 
+                    <div>
                         <CardHeader>
-                            <label htmlFor={id} className={todo.complete ? "active" : ""}><input type="checkbox" id={id}/> {todo.task} </label>
+                            <label htmlFor={id} className={todo.complete ? "active" : ""} checked={todo.complete} onChange={() => checkComplete(id)} ><input type="checkbox" id={id}/> {todo.task} </label>
                         </CardHeader>
                         <CardBody>
-                                <Editable defaultValue='Description' color="gray">
-                                    <EditablePreview />
-                                    <EditableTextarea />
-                                </Editable>
-                                <HStack>
-                                    {todo.due && !todo.category ? <Text fontSize="sm" ><TimeIcon />{todo.due} </Text>: null }
-                                    {todo.category && !todo.due ? <Text fontSize="sm">{todo.category}</Text>: null }
-                                    {todo.due && todo.category ? <Text fontSize="sm"><TimeIcon /> {todo.due} / {todo.category}</Text>: null}
-                                </HStack>
+                            <HStack>
+                                {todo.due && !todo.category ? <Text fontSize="sm" ><TimeIcon />{todo.due} </Text>: null }
+                                {todo.category && !todo.due ? <Text fontSize="sm">{todo.category}</Text>: null }
+                                {todo.due && todo.category ? <Text fontSize="sm"><TimeIcon /> {todo.due} / {todo.category}</Text>: null}
+                            </HStack>
                         </CardBody>
-                        
-                    </>
+                        <Stack display="flex" flexDirection="row" width="62px" justifyContent="center" >
+                            <HStack spacing={2} >
+                                <Button size="md" bg="none" onClick={toggleEditing} disabled={todo.complete} color="#333652"><EditIcon /> </Button>
+                                <Button size="md" bg="none" alignSelf="flex-end" onClick={() => deleteTodo(todo.id)} color="#333652"><MinusIcon /></Button>
+                            </HStack>
+                        </Stack>
+                    </div>
                 }
-                <Stack display="flex" flexDirection="row" width="62px" justifyContent="center" >
-                    {isEditing? 
-                        <Button onClick={toggleEditing}><CheckIcon /></Button>: 
-                        <HStack spacing={2} marginBottom="20px" >
-                            
-                            <Button size="md" bg="none" onClick={toggleEditing}  color="#333652"><EditIcon /> </Button>
-                            <Button size="md" bg="none" alignSelf="flex-end" onClick={() => deleteTodo(todo.id)} color="#333652"><MinusIcon /></Button>
-                        </HStack>
-                    }
-                </Stack>
             </Box>
         </Card>
     )

@@ -1,22 +1,24 @@
-import { Button, Input, HStack, FormErrorMessage, FormControl, Select, FormLabel, Tag, Avatar, TagLabel } from "@chakra-ui/react";
+import React, { useState, useContext } from "react";
+import { DataContext } from "./DataProvider";
+import { Button, Input, HStack, FormErrorMessage, FormControl, Select } from "@chakra-ui/react";
 import { AddIcon } from "@chakra-ui/icons";
 import { useFormik } from "formik";
-import uuid from "react-uuid";
 import * as yup from 'yup';
 
+function NewTodoForm() {
+    const [todos, setTodos] = useContext(DataContext);
 
-function NewTodoForm({updateTodos}) {
     const formik = useFormik({
         initialValues: {
             id: "",
             task: "",
             due: "",
             description: "",
-            inProgress: true,
+            complete: false,
             category:"",
         },
         onSubmit:(values, actions) => {
-            updateTodos({id: uuid(), task: values.task, due: values.due, description:"", inProgress: true, category: values.category});
+            setTodos([...todos, {task: values.task, due: values.due, description:"", complete: false, category: values.category}]);
             actions.resetForm();
         },
         validationSchema: yup.object({

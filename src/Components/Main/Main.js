@@ -3,24 +3,20 @@ import TodoList from '../Todos/TodoList'
 import './Main.css'
 import Sidebar from '../Sidebar/Sidebar'
 import ActiveTasks from '../Sidebar/Menu/ActiveTasks'
+import {DataProvider} from '../Todos/DataProvider'
 
 const Main = () => {
-    const [todos, setTodos] = useState([]);
-    const [menu, setMenu] = useState("")
-
-    const activeList = todos.filter(todo => todo.inProgress)
-    const completedList = todos.filter(todo => !todo.inProgress)
+    const [menu, setMenu] = useState("all")
 
     return (
-        <div className='main'>
-            <Sidebar todos={todos} menu={menu} setMenu={setMenu}/>
-            {menu === "all" ? <TodoList todos={todos} setTodos={setTodos} /> : null}
-            {menu === "active" ? <ActiveTasks todos={activeList}/> : null }
-            {menu === "completed?" ? <ActiveTasks todos={completedList} /> : null};
-            
-
-        </div>
+            <div className='main'>
+                <Sidebar menu={menu} setMenu={setMenu}/>
+                {/* {menu === "all" ? <TodoList /> : null} */}
+                <TodoList />
+                {/* {menu === "active" ? <ActiveTasks /> : null } */}
+                {/* {menu === "completed?" ? <ActiveTasks todos={completedList} /> : null}; */}
+            </div>
     )
 }
 
-export default Main
+export default Main;

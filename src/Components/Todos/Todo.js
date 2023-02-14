@@ -3,8 +3,11 @@ import { Card, Text, Heading, Box, Input, Stack, Button, HStack, CardHeader, Car
 import { MinusIcon, EditIcon, CheckIcon, TimeIcon } from '@chakra-ui/icons'
 
 
-const Todo = ({updateTodo, deleteTodo, toggleProgress, todo}) => {
+const Todo = ({updateTodo, deleteTodo, toggleProgress, todo, id}) => {
+
     const [isEditing, setIsEditing] = useState(false)
+    const [checked, setChecked] = useState(todo.complete);
+
 
     const toggleEditing = () => {
         if (isEditing) {
@@ -14,6 +17,12 @@ const Todo = ({updateTodo, deleteTodo, toggleProgress, todo}) => {
         }
     }
 
+    const checkHandler = () => {
+        setChecked(!checked);
+        // toggleProgress(todo.id, !checked);
+    }
+
+
     return (
         <Card display="flex" margin="30px" borderRadius={15} minW="250px" minH="230px" boxShadow='lg' rounded='md'>
             <Box display="flex" flexDirection="column" justifyContent="space-between" alignItems="center"  margin="20px" borderBottom="1px solid grey" >
@@ -21,9 +30,7 @@ const Todo = ({updateTodo, deleteTodo, toggleProgress, todo}) => {
                     <Input name="editedText" id="editedText" onChange={e => updateTodo(todo.id, "task", e.target.value)} autoFocus={true} minH="150px" marginBottom="30px"/> : 
                     <>
                         <CardHeader>
-                            {!todo.inProgress? 
-                            <Heading size="md" height="20px" textDecorationLine="line-through">{todo.task} </Heading>
-                            :<Heading size="md" height="20px">{todo.task} </Heading>}
+                            <label htmlFor={id} className={todo.complete ? "active" : ""}><input type="checkbox" id={id}/> {todo.task} </label>
                         </CardHeader>
                         <CardBody>
                                 <Editable defaultValue='Description' color="gray">
@@ -43,7 +50,7 @@ const Todo = ({updateTodo, deleteTodo, toggleProgress, todo}) => {
                     {isEditing? 
                         <Button onClick={toggleEditing}><CheckIcon /></Button>: 
                         <HStack spacing={2} marginBottom="20px" >
-                            <Checkbox  size="lg" paddingRight="20px" colorScheme="gray" onChange={() => toggleProgress(todo.id, todo.inProgress)} isChecked={!todo.inProgress}/>
+                            
                             <Button size="md" bg="none" onClick={toggleEditing}  color="#333652"><EditIcon /> </Button>
                             <Button size="md" bg="none" alignSelf="flex-end" onClick={() => deleteTodo(todo.id)} color="#333652"><MinusIcon /></Button>
                         </HStack>

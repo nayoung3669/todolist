@@ -6,25 +6,17 @@ import ActiveTasks from '../Sidebar/Menu/ActiveTasks'
 
 const Main = () => {
     const [todos, setTodos] = useState([]);
-    const [menu, setMenu] = useState([""])
+    const [menu, setMenu] = useState("")
 
-
-    const updateActiveTodos = () => {
-        const updatedList = todos.filter(todo => !todo.inProgress)
-        setMenu("active");
-        return (
-            <ActiveTasks updatedList={updatedList}/>
-        )
-    }
-
-    const completedList = () => {
-
-    }
+    const activeList = todos.filter(todo => todo.inProgress)
+    const completedList = todos.filter(todo => !todo.inProgress)
 
     return (
         <div className='main'>
-            <Sidebar todos={todos} activeTodos={updateActiveTodos} completedList={completedList}/>
-            {menu === "active" ? <ActiveTasks /> : <TodoList todos={todos} setTodos={setTodos} /> }
+            <Sidebar todos={todos} menu={menu} setMenu={setMenu}/>
+            {menu === "all" ? <TodoList todos={todos} setTodos={setTodos} /> : null}
+            {menu === "active" ? <ActiveTasks todos={activeList}/> : null }
+            {menu === "completed?" ? <ActiveTasks todos={completedList} /> : null};
             
 
         </div>

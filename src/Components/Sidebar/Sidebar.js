@@ -5,7 +5,7 @@ import { Box, Button } from '@chakra-ui/react'
 import ActiveTasks from './Menu/ActiveTasks'
 
 
-const Sidebar = ({todos, activeTodos, completedTodos}) => {
+const Sidebar = ({todos, menu, setMenu}) => {
 
 
     return (
@@ -13,10 +13,10 @@ const Sidebar = ({todos, activeTodos, completedTodos}) => {
             {/* <ChevronRightIcon className='toggle' boxSize={8}/> */}
             <Box className='menu_bar'>
                 <ul className='menu_categories' >
-                    <li><Button borderRadius={10} width="100%" >All Tasks</Button></li>
+                    <li><Button borderRadius={10} width="100%" onClick={() => setMenu("all")} >All Tasks</Button></li>
                     <li><Button borderRadius={10} width="100%" >Category<ChevronDownIcon boxSize={7}  /></Button></li>
-                    <li><Button borderRadius={10} width="100%" onClick={() => activeTodos()}>Active Tasks</Button></li>
-                    <li><Button borderRadius={10} width="100%" >Completed Tasks</Button></li>
+                    <li><Button borderRadius={10} width="100%" onClick={() => setMenu("active")}>Active Tasks</Button></li>
+                    <li><Button borderRadius={10} width="100%" onClick={() => setMenu("completed")} >Completed Tasks</Button></li>
                 </ul>
             </Box>
         </Box>

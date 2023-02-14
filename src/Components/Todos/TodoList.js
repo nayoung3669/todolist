@@ -12,12 +12,10 @@ function TodoList({todos, setTodos}) {
         setTodos([...todos, data]);
     }
 
-    const updateTodos = (id, name, editedText) => {
+    const updateTodos = (id, editedText) => {
         const updatedTodos = todos.map((todo) => {
             if (id === todo.id) {
                 return {...todo, task: editedText} 
-                //change it to name !!!!
-                
             } else {
                 return todo;
             }
@@ -32,14 +30,15 @@ function TodoList({todos, setTodos}) {
 
     const toggleProgress = (id, state) => {
         const updatedTodos = todos.map((todo) => {
-            if(id === todo.id) {
-                return {...todo, inProgress: !state};
+            if(id === todo.id && state) {
+                return {...todo, inProgress: false};
             } else {
-                return todo;
+                return {...todo, inProgress: true};
             }
         })
         setTodos(updatedTodos);
-        console.log(todos);
+        console.log("todostate-----")
+        console.log(todos)
     }
 
     return (
@@ -62,7 +61,6 @@ function TodoList({todos, setTodos}) {
                 </Box>
             </Stack>
     )
-
             }
 
 export default TodoList;

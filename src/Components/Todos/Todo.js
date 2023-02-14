@@ -4,7 +4,7 @@ import { MinusIcon, EditIcon, TimeIcon } from '@chakra-ui/icons'
 import './Todo.css'
 
 
-const Todo = ({updateTodo, deleteTodo, checkComplete, todo, id}) => {
+const Todo = ({updateTodo, deleteTodo, handleEditedValue, checkComplete, todo, id}) => {
 
     const [isEditing, setIsEditing] = useState(false)
     const [updatedTask, setUpdatedTask] = useState("");
@@ -13,9 +13,13 @@ const Todo = ({updateTodo, deleteTodo, checkComplete, todo, id}) => {
         setIsEditing(true);
     }
 
-    const handleEditing = () => {
+    const handleEditing = (editedValue, id) => {
         setIsEditing(false);
-        todo.task = updatedTask;
+        if (editedValue) {
+            handleEditedValue(updatedTask, id)
+        } else {
+            setUpdatedTask(todo.task);
+        }
         setUpdatedTask('');
     }
 
@@ -24,8 +28,7 @@ const Todo = ({updateTodo, deleteTodo, checkComplete, todo, id}) => {
             <Box display="flex" flexDirection="column" justifyContent="space-between" alignItems="center"  margin="20px" borderBottom="1px solid grey" >
                 {isEditing
                     ? <CardBody><Input type="text" id="updatedTask" name="updatedTask" value={updatedTask} onChange={(e) => setUpdatedTask(e.target.value)} /><Button size="sm" onClick={() => handleEditing(id)}>Save</Button></CardBody>
-                    : 
-                    <div>
+                    : <div>
                         <CardHeader>
                             <label htmlFor={id} className={todo.complete ? "active" : ""} checked={todo.complete} onChange={() => checkComplete(id)} ><input type="checkbox" id={id}/> {todo.task} </label>
                         </CardHeader>

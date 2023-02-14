@@ -34,6 +34,16 @@ function TodoList() {
         })
         setTodos(updatedTodos);
     }
+    
+    const handleEditedValue = (editedValue, id) => {
+        const updatedTodos = [...todos];
+        updatedTodos.forEach((todo, index) => {
+            if(index === id) {
+                todo.task = editedValue;
+            }
+        })
+        setTodos(updatedTodos);
+    }
 
     return (
             <Stack className="cards" width="100%" bg="#E9EAEC" padding="15px">
@@ -46,6 +56,7 @@ function TodoList() {
                                 <Todo
                                     // updateTodo={updateTodos}
                                     // deleteTodo={deleteTodos}
+                                    handleEditedValue={handleEditedValue}
                                     checkComplete={switchComplete}
                                     todo={todo}
                                     key={index}

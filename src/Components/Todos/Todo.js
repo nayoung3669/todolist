@@ -1,13 +1,14 @@
-import React, { useState } from 'react'
-import { Card, Text, Box, Input, Stack, Button, HStack, CardHeader, CardBody } from '@chakra-ui/react'
+import React, { useState, useContext } from 'react'
+import { Card, Text, Box, Input, Button, HStack, CardHeader, CardBody } from '@chakra-ui/react'
 import { MinusIcon, EditIcon, TimeIcon } from '@chakra-ui/icons'
 import './Todo.css'
+import { DataContext } from '../../Context/DataProvider'
 
 
-const Todo = ({deleteTodo, handleEditedValue, checkComplete, todo, id}) => {
-
+const Todo = ({todo, id}) => {
     const [isEditing, setIsEditing] = useState(false)
     const [updatedTask, setUpdatedTask] = useState("");
+    const {todos, setTodos, deleteTodos, switchComplete, handleEditedValue} = useContext(DataContext)
 
     const toggleEditing = () => {
         setIsEditing(true);
@@ -32,16 +33,16 @@ const Todo = ({deleteTodo, handleEditedValue, checkComplete, todo, id}) => {
                         <CardHeader>
                             {todo.category? <Text fontSize="xs" >{todo.category}</Text>: null }
                             <br />
-                            <label htmlFor={id} className={todo.complete ? "active" : ""}  ><input type="checkbox" id={id} checked={todo.complete} onChange={() => checkComplete(id)} /> {todo.task}</label>
+                            <label htmlFor={id} className={todo.complete ? "active" : ""}  ><input type="checkbox" id={id} checked={todo.complete} onChange={() => switchComplete(id)} /> {todo.task}</label>
                         </CardHeader>
                         <CardBody>
                             <HStack>
-                                {todo.due ? <Text fontSize="xs" ><TimeIcon />{todo.due} </Text>: null }
+                                {todo.due ? <Text fontSize="xs" ><TimeIcon /> {todo.due} </Text>: null }
                             </HStack>
                         </CardBody>
                             <HStack display="flex" flexDirection="row" justifyContent="flex-end">
                                 <Button size="md" bg="none" onClick={toggleEditing} disabled={todo.complete} color="#333652"><EditIcon /> </Button>
-                                <Button size="md" bg="none" alignSelf="flex-end" onClick={() => deleteTodo(id)} color="#333652"><MinusIcon /></Button>
+                                <Button size="md" bg="none" alignSelf="flex-end" onClick={() =>deleteTodos(id)} color="#333652"><MinusIcon /></Button>
                             </HStack>
                     </div>
                 }

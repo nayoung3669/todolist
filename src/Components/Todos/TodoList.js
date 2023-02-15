@@ -2,38 +2,12 @@ import React, { useContext, useState } from "react";
 import './TodoList.css'
 import NewTodoForm from "./NewTodoForm";
 import Todo from "./Todo";
-import { DataContext } from './DataProvider'
+import { DataContext } from '../../Context/DataProvider'
 import { Stack, Box, Text } from "@chakra-ui/react";
 
 function TodoList() {
-    const [todos, setTodos] = useContext(DataContext);
+    const {todos, setTodos} = useContext(DataContext);
     const [checkAll, setCheckAll] = useState(false);
-
-    const deleteTodos = id => {
-        const deletedList = todos.filter((todo, index) => index !== id);
-        setTodos(deletedList);
-    } 
-
-    const switchComplete = id => {
-        const updatedTodos = [...todos];
-        updatedTodos.forEach((todo, index) => {
-            if(index === id) {
-                todo.complete = !todo.complete
-            }
-        })
-        setTodos(updatedTodos);
-    }
-    
-    const handleEditedValue = (editedValue, id) => {
-        console.log(editedValue);
-        const updatedTodos = [...todos];
-        updatedTodos.forEach((todo, index) => {
-            if(index === id) {
-                todo.task = editedValue;
-            }
-        })
-        setTodos(updatedTodos);
-    }
 
     const handleCheckAll = () => {
         const updatedTodos = [...todos]
@@ -43,7 +17,7 @@ function TodoList() {
         setTodos(updatedTodos);
         setCheckAll(!checkAll);
     }
-
+    
     const incompleteCount = () => {
         var count = 0;
         todos.forEach((todo) => {
@@ -56,7 +30,6 @@ function TodoList() {
 
     return (
             <Stack className="cards" width="100%" bg="#E9EAEC" p="28px" border="2px solid #333652">
-                
                 <NewTodoForm />
                 <Box className="todoList" >
                     <ul>
@@ -64,9 +37,6 @@ function TodoList() {
                             return (
                             <li>
                                 <Todo
-                                    deleteTodo={deleteTodos}
-                                    handleEditedValue={handleEditedValue}
-                                    checkComplete={switchComplete}
                                     todo={todo}
                                     key={index}
                                     id={index}
@@ -75,13 +45,12 @@ function TodoList() {
                         })}
                     </ul>
                 </Box>
-                
                 <Box className="allButton" display="flex" flex-direction="row">
                     <input type="checkbox" name="allButton" id="allButton" checked={checkAll} onClick={handleCheckAll}/> <Text>ALL</Text>
                 </Box>
                 <Text>{incompleteCount()} tasks left</Text>
             </Stack>
     )
-            }
+}
 
 export default TodoList;

@@ -3,7 +3,7 @@ import Main from './Components/Main/Main';
 import Header from './Components/Header/';
 import Footer from './Components/Footer'
 import { ChakraProvider } from '@chakra-ui/react';
-import { DataProvider } from './Components/Todos/DataProvider';
+import { DataProvider } from './Context/DataProvider';
 
 
 function App() {
@@ -11,11 +11,11 @@ function App() {
     <div className="App">
         <ChakraProvider>
           <div id="header"><Header /></div> 
-              <div id="main">
-                <DataProvider> 
-                  <Main />
-                </DataProvider>
-              </div>
+                  <DataProvider> 
+                    <div id="main">
+                      <Main />
+                    </div>
+                  </DataProvider>
           <div id="footer"><Footer /></div>
         </ChakraProvider>
     </div>

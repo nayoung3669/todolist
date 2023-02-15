@@ -1,12 +1,12 @@
 import React, { useState, useContext } from "react";
-import { DataContext } from "./DataProvider";
+import { DataContext } from "../../Context/DataProvider";
 import { Button, Input, HStack, FormErrorMessage, FormControl, Select } from "@chakra-ui/react";
 import { AddIcon } from "@chakra-ui/icons";
 import { useFormik } from "formik";
 import * as yup from 'yup';
 
 function NewTodoForm() {
-    const [todos, setTodos] = useContext(DataContext);
+    const {todos, setTodos} = useContext(DataContext);
 
     const formik = useFormik({
         initialValues: {

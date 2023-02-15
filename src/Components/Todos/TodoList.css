@@ -1,6 +1,10 @@
 .todoList {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
+  height: 700px;
+  padding: 10px;
+  overflow-y: scroll;
+  border: "2px solid #333652";
 }
 
 li {

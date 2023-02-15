@@ -4,11 +4,12 @@
 
 .App {
   display: grid;
+  justify-content: center;
   grid-template-areas:
     "header  header"
     "main main"
     "footer  footer";
-  background-color: #e9eaec;
+  margin: 30px;
 }
 
 #header {
@@ -21,8 +22,12 @@
 
 #main {
   grid-area: main;
+  border-radius: 1%;
+  box-shadow: 4px 4px 2px rgb(209, 207, 207);
 }
 
 #footer {
   grid-area: footer;
+  border-radius: 1%;
+  box-shadow: 4px 4px 2px rgb(209, 207, 207);
 }

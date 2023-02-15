@@ -1,6 +1,6 @@
 .main {
   display: grid;
   grid-template-columns: 1fr 4fr;
-  max-width: 1100px;
-  min-height: 680px;
+  max-width: 1300px;
+  min-height: 780px;
 }

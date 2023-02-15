@@ -4,7 +4,7 @@ import { MinusIcon, EditIcon, TimeIcon } from '@chakra-ui/icons'
 import './Todo.css'
 
 
-const Todo = ({updateTodo, deleteTodo, handleEditedValue, checkComplete, todo, id}) => {
+const Todo = ({deleteTodo, handleEditedValue, checkComplete, todo, id}) => {
 
     const [isEditing, setIsEditing] = useState(false)
     const [updatedTask, setUpdatedTask] = useState("");
@@ -24,27 +24,25 @@ const Todo = ({updateTodo, deleteTodo, handleEditedValue, checkComplete, todo, i
     }
 
     return (
-        <Card display="flex" margin="25px" borderRadius={15} minW="220px" minH="180px" boxShadow='lg' rounded='md'>
-            <Box display="flex" flexDirection="column" justifyContent="space-between" alignItems="center"  margin="20px" borderBottom="1px solid grey" >
+        <Card display="flex" margin="25px" borderRadius={15} minW="220px" minH="170px" boxShadow='xl' rounded='md'>
+            <Box display="flex" flexDirection="column"  margin="7px" borderBottom="4px solid #FAD02C" >
                 {isEditing
                     ? <CardBody><Input type="text" id="updatedTask" name="updatedTask" value={updatedTask} onChange={(e) => setUpdatedTask(e.target.value)} /><Button size="sm" onClick={() => handleEditing(id)}>Save</Button></CardBody>
                     : <div>
                         <CardHeader>
-                            <label htmlFor={id} className={todo.complete ? "active" : ""} checked={todo.complete} onChange={() => checkComplete(id)} ><input type="checkbox" id={id}/> {todo.task} </label>
+                            {todo.category? <Text fontSize="xs" >{todo.category}</Text>: null }
+                            <br />
+                            <label htmlFor={id} className={todo.complete ? "active" : ""}  ><input type="checkbox" id={id} checked={todo.complete} onChange={() => checkComplete(id)} /> {todo.task}</label>
                         </CardHeader>
                         <CardBody>
                             <HStack>
-                                {todo.due && !todo.category ? <Text fontSize="sm" ><TimeIcon />{todo.due} </Text>: null }
-                                {todo.category && !todo.due ? <Text fontSize="sm">{todo.category}</Text>: null }
-                                {todo.due && todo.category ? <Text fontSize="sm"><TimeIcon /> {todo.due} / {todo.category}</Text>: null}
+                                {todo.due ? <Text fontSize="xs" ><TimeIcon />{todo.due} </Text>: null }
                             </HStack>
                         </CardBody>
-                        <Stack display="flex" flexDirection="row" width="62px" justifyContent="center" >
-                            <HStack spacing={2} >
+                            <HStack display="flex" flexDirection="row" justifyContent="flex-end">
                                 <Button size="md" bg="none" onClick={toggleEditing} disabled={todo.complete} color="#333652"><EditIcon /> </Button>
-                                <Button size="md" bg="none" alignSelf="flex-end" onClick={() => deleteTodo(todo.id)} color="#333652"><MinusIcon /></Button>
+                                <Button size="md" bg="none" alignSelf="flex-end" onClick={() => deleteTodo(id)} color="#333652"><MinusIcon /></Button>
                             </HStack>
-                        </Stack>
                     </div>
                 }
             </Box>

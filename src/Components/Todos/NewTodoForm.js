@@ -30,9 +30,9 @@ function NewTodoForm() {
 
     return (
         <form onSubmit={formik.handleSubmit}>
-            <HStack border="2px solid #90ADC6" borderRadius={10} padding="10px" >
+            <HStack display="flex" justifyContent="space-between" border="2px solid #333652" borderRadius={10} padding="10px" >
                 <FormControl isInvalid={formik.errors.task && formik.touched.task}>
-                    <Input id="task" name="task" size="lg" type="text" width="500px" minW="200px" variant="outline"
+                    <Input id="task" name="task" size="lg" type="text"  minW="300px" width="100%" variant="outline"
                         value={formik.values.task} onChange={formik.handleChange} placeholder="New Task" border="none" errorBorderColor="#000000"
                     />
                     <FormErrorMessage>{formik.errors.task}</FormErrorMessage>
@@ -41,14 +41,13 @@ function NewTodoForm() {
                     <Input id="due" type="date" name="due" size="sm" variant="flushed" width="120px" value={formik.values.due} onChange={formik.handleChange} {...getFieldProps("due")}/>
                 </FormControl>
                 <FormControl >
-                    
-                    <Select id="" variant="flushed" name="due" maxW="100px" placeholder="Category" value={formik.values.category} onChange={formik.handleChange} {...getFieldProps("category")}>
+                    <Select id="" variant="flushed" name="due" width="100px" placeholder="Category" value={formik.values.category} onChange={formik.handleChange} {...getFieldProps("category")}>
                         <option value="School" color="red">School 📖</option>
                         <option value="Work">Work 📂</option>
                         <option value="Project">Project 📚</option>
                     </Select>
                 </FormControl>
-                <Button type="submit" color="#FAD02C" bg="#90ADC6" size="md" ><AddIcon /></Button>
+                <Button type="submit" color="#FAD02C" bg="#333652" size="md" ><AddIcon /></Button>
             </HStack>
         </form>
     )

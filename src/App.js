@@ -4,12 +4,12 @@ import Header from './Components/Header/Header';
 import Footer from './Components/Footer/Footer'
 import { ChakraProvider } from '@chakra-ui/react';
 import { DataProvider } from './Components/Todos/DataProvider';
+import { BrowserRouter } from 'react-router-dom';
 
 
 function App() {
   return (
     <div className="App">
-
         <ChakraProvider>
           <div id="header"><Header /></div> 
               <div id="main">

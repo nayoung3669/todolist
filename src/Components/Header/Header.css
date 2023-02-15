@@ -1,7 +1,7 @@
 .header {
   display: flex;
   flex-direction: row;
-  border: 1px solid gray;
+  border: 2px solid #333652;
   background-color: #e9eaec;
   color: #333652;
   padding: 20px;

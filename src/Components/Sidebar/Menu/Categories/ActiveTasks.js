@@ -1,5 +1,5 @@
 import React from 'react'
-import Todo from '../../Todos/Todo'
+import Todo from '../../../Todos/Todo'
 
 const ActiveTasks = ({todos, menu}) => {
 

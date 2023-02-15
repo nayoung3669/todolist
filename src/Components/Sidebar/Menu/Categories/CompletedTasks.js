@@ -3,17 +3,18 @@ import Todo from '../../../Todos/Todo'
 import "../../../Todos/Todo.css"
 import { DataContext } from '../../../Todos/DataProvider'
 
-const ActiveTasks = () => {
 
+const CompletedTasks = () => {
   const [todos] = useContext(DataContext);
 
-  const active = todos.filter((todo) => todo.complete !== true);
+  const completed = todos.filter((todo) => todo.complete === true);
+  console.log("comp=-------")
+  console.log(completed)
 
-  console.log(active);
   return (
-    <div>
+    <div className='completedTasks'>
       <ul>
-        {active.map ((todo) => {
+        {completed.map ((todo) => {
             return (
             <li>
                 <Todo 
@@ -27,4 +28,5 @@ const ActiveTasks = () => {
 }
 
 
-export default ActiveTasks
+export default CompletedTasks
+

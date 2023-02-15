@@ -1,14 +1,12 @@
-import React, { useState, useContext } from 'react'
+import React, { useState} from 'react'
 import './Sidebar.css'
 import { ChevronDownIcon, ChevronRightIcon } from '@chakra-ui/icons'
 import { Box, Divider, Text } from '@chakra-ui/react'
-import { DataContext } from '../Todos/DataProvider'
 import userImage from '../../assets/user/userImage.png'
+import { Link} from 'react-router-dom'
 
 const Sidebar = () => {
     const [open, setOpen] = useState(true);
-    const [menu, setMenu] = useState("all")
-    const [todos, setTodos] = useContext(DataContext);
 
     return (
         <Box className='sidebar' minW="230px">
@@ -21,11 +19,12 @@ const Sidebar = () => {
                 <Divider/>
                 <Box paddingTop="30px">
                     <ul className='menuCategories'>
-                        <li><Text borderRadius={10} width="100%" onClick={() => setMenu("all")} >All Tasks</Text></li>
-                        <li><Text borderRadius={10} width="100%" >Category<ChevronDownIcon boxSize={7} /></Text></li>
-                        <li><Text borderRadius={10} width="100%" onClick={() => setMenu("active")}>Active Tasks</Text></li>
-                        <li><Text borderRadius={10} width="100%" onClick={() => setMenu("completed")} >Completed Tasks</Text></li>
+                        <li><Link to="/"> <Text>All Tasks</Text></Link></li>
+                        <li><Text>Category<ChevronDownIcon boxSize={7} /></Text></li>
+                        <li><Link to="/active"><Text>Active Tasks</Text></Link></li>
+                        <li><Link to="/completed"><Text>Completed Tasks</Text></Link></li>
                     </ul>
+                    
                 </Box>
             </Box>
         </Box>

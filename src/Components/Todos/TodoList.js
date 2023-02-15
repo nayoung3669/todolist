@@ -9,9 +9,7 @@ function TodoList() {
     const [todos, setTodos] = useContext(DataContext);
     const [checkAll, setCheckAll] = useState(false);
 
-    console.log(todos);
-
-    const deleteTodos = (id) => {
+    const deleteTodos = id => {
         const deletedList = todos.filter((todo, index) => index !== id);
         setTodos(deletedList);
     } 
@@ -27,6 +25,7 @@ function TodoList() {
     }
     
     const handleEditedValue = (editedValue, id) => {
+        console.log(editedValue);
         const updatedTodos = [...todos];
         updatedTodos.forEach((todo, index) => {
             if(index === id) {
@@ -57,6 +56,7 @@ function TodoList() {
 
     return (
             <Stack className="cards" width="100%" bg="#E9EAEC" p="28px" border="2px solid #333652">
+                
                 <NewTodoForm />
                 <Box className="todoList" >
                     <ul>
@@ -75,6 +75,7 @@ function TodoList() {
                         })}
                     </ul>
                 </Box>
+                
                 <Box className="allButton" display="flex" flex-direction="row">
                     <input type="checkbox" name="allButton" id="allButton" checked={checkAll} onClick={handleCheckAll}/> <Text>ALL</Text>
                 </Box>

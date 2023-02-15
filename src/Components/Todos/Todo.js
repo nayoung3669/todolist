@@ -13,9 +13,9 @@ const Todo = ({deleteTodo, handleEditedValue, checkComplete, todo, id}) => {
         setIsEditing(true);
     }
 
-    const handleEditing = (editedValue, id) => {
+    const handleEditing = id => {
         setIsEditing(false);
-        if (editedValue) {
+        if (updatedTask) {
             handleEditedValue(updatedTask, id)
         } else {
             setUpdatedTask(todo.task);
@@ -27,7 +27,7 @@ const Todo = ({deleteTodo, handleEditedValue, checkComplete, todo, id}) => {
         <Card display="flex" margin="25px" borderRadius={15} minW="220px" minH="170px" boxShadow='xl' rounded='md'>
             <Box display="flex" flexDirection="column"  margin="7px" borderBottom="4px solid #FAD02C" >
                 {isEditing
-                    ? <CardBody><Input type="text" id="updatedTask" name="updatedTask" value={updatedTask} onChange={(e) => setUpdatedTask(e.target.value)} /><Button size="sm" onClick={() => handleEditing(id)}>Save</Button></CardBody>
+                    ? <CardBody><Input type="text" id="updatedTask" value={updatedTask} onChange={(e) => setUpdatedTask(e.target.value)} /><Button size="sm" onClick={() => handleEditing(id)}>Save</Button></CardBody>
                     : <div>
                         <CardHeader>
                             {todo.category? <Text fontSize="xs" >{todo.category}</Text>: null }

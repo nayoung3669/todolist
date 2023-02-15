@@ -2,20 +2,22 @@ import React,{useState} from 'react'
 import TodoList from '../Todos/TodoList'
 import './Main.css'
 import Sidebar from '../Sidebar/Sidebar'
-import ActiveTasks from '../Sidebar/Menu/ActiveTasks'
-import {DataProvider} from '../Todos/DataProvider'
+import ActiveTasks from '../Sidebar/Menu/Categories/ActiveTasks'
+import { Route, Routes } from 'react-router-dom'
+import CompletedTasks from '../Sidebar/Menu/Categories/CompletedTasks'
 
 const Main = () => {
     const [menu, setMenu] = useState("all")
 
     return (
-            <div className='main'>
-                <Sidebar menu={menu} setMenu={setMenu}/>
-                {/* {menu === "all" ? <TodoList /> : null} */}
-                <TodoList />
-                {/* {menu === "active" ? <ActiveTasks /> : null } */}
-                {/* {menu === "completed?" ? <ActiveTasks todos={completedList} /> : null}; */}
-            </div>
+        <div className='main'>
+            <Sidebar menu={menu} setMenu={setMenu}/>
+            <Routes>
+                <Route path="/" element={<TodoList />} />
+                <Route path="/active" element={<ActiveTasks />} />
+                <Route path="/completed" element={<CompletedTasks/>} />
+            </Routes>
+        </div>
     )
 }
 
